@@ -1,5 +1,42 @@
 #!/bin/bash
 
+forge_12_install () {
+	dialog --title "this would install forge 1.12.2" --msgbox "This would install forge 1.12.2" 7 60
+
+	mkdir Minecraft-Server
+	cd Minecraft-Server
+
+	total_ram=$(free -m | awk '{print $2}' | sed -n 2p)
+	ram_message="How much ram (in megabytes) would you like to dedicate to the server. You have ""$total_ram"" in total."
+	
+	dialog --title "Dedicated Ram" --inputbox "$ram_message" 7 60 2> /tmp/minecraft_autoconfig_dialog3
+	dialog --title "Eula" --yesno "Do you except the minecraft EULA?" 7 60
+
+	if [ $? == 0 ]
+	then
+		echo eula=true > eula.txt
+	else
+		dialog --title "EULA" --msgbox "Sorry you need to execpt the EULA!"
+	fi
+	
+	dedicated_ram=$(cat /tmp/minecraft_autoconfig_dialog3)
+	full_start_command="java -Xmx""$dedicated_ram""M -Xms1024M -jar minecraft_server.1.12.2.jar nogui"
+	
+	echo "$full_start_command" > start.sh
+	chmod +x start.sh
+
+	rm /tmp/minecraft_autoconfig_dialog3
+
+	clear
+	echo "Downloading Minecraft"
+	echo "-------------------------------------"
+	wget -O forge-installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/1.12.2-14.23.5.2855/forge-1.12.2-14.23.5.2855-installer.jar"
+	chmod +x forge-installer.jar
+	java -jar forge-installer.jar --installServer
+
+	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 9 70
+}
+
 vanilla_16_install () { 
 
 	mkdir Minecraft-Server
@@ -32,7 +69,7 @@ vanilla_16_install () {
 	wget -O minecraft-server.jar "https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar"
 	chmod +x minecraft-server.jar
 
-	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 7 60
+	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 9 70
 }
 
 vanilla_12_install () { 
@@ -67,7 +104,7 @@ vanilla_12_install () {
 	wget -O minecraft-server.jar "https://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar"
 	chmod +x minecraft-server.jar
 
-	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 7 60
+	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 9 70
 }
 
 
@@ -83,7 +120,7 @@ minecraft_version_12 () {
 		vanilla_12_install
 	elif [ "$sub_version" == "Forge" ]
 	then
-		forge_install_12
+		forge_12_install
 	fi
 }
 
