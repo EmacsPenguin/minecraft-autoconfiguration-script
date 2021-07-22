@@ -1,6 +1,10 @@
 # minecraft-autoconfiguration-script
 This is a script that automates setting up a minecraft server. It is still a work in progress, but the 1.12.2 and 1.16.5 vanilla setup is working flawlessly.
 
+## usage
+
+run `curl https://raw.githubusercontent.com/EmacsPenguin/minecraft-autoconfiguration-script/main/minecraft-config-script.sh | bash` in a linux terminal. Make sure you have the dependencies installed.
+
 ## dependencies 
 
 You need the following programs to use the script.
