@@ -34,8 +34,6 @@ forge_12_install () {
 	chmod +x forge-installer.jar
 	java -jar forge-installer.jar --installServer
 
-	dialog --title "Mods" --menu "What mods would you like to install. You can download more later." 20 80 5 Tinkers-Construct "Makes better tools in minecraft. Can be OP." Thermal-Dynamics "Adds more automation" Draconic-Evolution "Adds end game armor, (requires thermal dynamics to function)." Pams-Harvest-Craft "Adds new food, but makes vanilla food worse" None "Add no mods" 2> /tmp/minecraft_autoconfig_dialog4
-	mods=$(cat /tmp/minecraft_autoconfig_dialog4)
 	rm /tmp/minecraft_autoconfig_dialog4
 
 	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 9 70
