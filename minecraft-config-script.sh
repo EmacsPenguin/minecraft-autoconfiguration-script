@@ -32,7 +32,7 @@ vanilla_16_install () {
 	wget -O minecraft-server.jar "https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar"
 	chmod +x minecraft-server.jar
 
-	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh" 7 60
+	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 7 60
 }
 
 vanilla_12_install () { 
@@ -67,7 +67,7 @@ vanilla_12_install () {
 	wget -O minecraft-server.jar "https://s3.amazonaws.com/Minecraft.Download/versions/1.16.5/minecraft_server.1.16.5.jar"
 	chmod +x minecraft-server.jar
 
-	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh" 7 60
+	dialog --title "Your Done!" --msgbox "To run your minecraft server go to the Minecraft-Server directory and run start.sh. You will need to manually configure your networking. You may need to open your firewall, and portforword the server. You can use Gnu Screen or another terminal multiplexer to run your server without keeping your terminal open." 7 60
 }
 
 
